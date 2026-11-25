@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1040" viewBox="0 0 1520 1040" role="img" aria-labelledby="erTitle erDesc">
+  <title id="erTitle">AEROPIX entity relationship diagram</title>
+  <desc id="erDesc">Four tables: users, images, albums and album_images. A user owns many images and albums. Albums and images have a many-to-many relationship through the album_images join table, which stores the time an image was added.</desc>
+
+  <defs>
+    <pattern id="erDots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.1" fill="#15172A" opacity="0.06"/>
+    </pattern>
+    <filter id="erShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#15172A" flood-opacity="0.08"/>
+    </filter>
+    <marker id="one" viewBox="0 0 12 12" refX="6" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M6 1 V11" stroke="#5B4BD6" stroke-width="1.8" stroke-linecap="round"/>
+    </marker>
+    <marker id="many" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto">
+      <path d="M11 6 L1 1 M11 6 L1 6 M11 6 L1 11" stroke="#5B4BD6" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    </marker>
+    <style>
+      .eyebrow { font: 600 12px "Segoe UI", Inter, sans-serif; letter-spacing: 2.6px; text-transform: uppercase; fill: #5B4BD6; }
+      .title { font: 600 36px "Segoe UI", Inter, sans-serif; letter-spacing: -1.2px; fill: #15172A; }
+      .subtitle { font: 400 15px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .entityName { font: 600 15px "Segoe UI", Inter, sans-serif; fill: #FFFFFF; }
+      .entityMeta { font: 400 10px "Segoe UI", Inter, sans-serif; fill: rgba(255,255,255,0.62); }
+      .col { font: 500 11.5px "Segoe UI", Inter, sans-serif; fill: #1C1F31; }
+      .type { font: 400 10.5px "Consolas", "Cascadia Code", monospace; fill: #8B8D9D; }
+      .key { font: 700 8.5px "Segoe UI", Inter, sans-serif; letter-spacing: 0.4px; fill: #FFFFFF; }
+      .rel { font: 600 10.5px "Segoe UI", Inter, sans-serif; fill: #5B4BD6; }
+      .note { font: 400 11px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .legend { font: 400 10.5px "Segoe UI", Inter, sans-serif; fill: #626579; }
+    </style>
+  </defs>
+
+  <rect width="1520" height="1040" fill="#F7F4EE"/>
+  <rect width="1520" height="1040" fill="url(#erDots)"/>
+  <rect x="0" y="0" width="760" height="330" fill="#EEE9FB" opacity="0.45"/>
+
+  <rect x="64" y="52" width="34" height="3" rx="1.5" fill="#5B4BD6"/>
+  <text x="110" y="60" class="eyebrow">Data model · SQLite 3 (WAL)</text>
+  <text x="64" y="100" class="title">Four tables, one clear ownership story.</text>
+  <text x="64" y="130" class="subtitle">Metadata only. Image binaries live in Amazon S3 (or local disk) under opaque UUID object keys.</text>
+
+  <!-- Legend -->
+  <g transform="translate(1036 54)">
+    <rect width="420" height="76" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+    <g transform="translate(18 18)">
+      <rect width="24" height="15" rx="4" fill="#5B4BD6"/>
+      <text x="12" y="11" text-anchor="middle" class="key">PK</text>
+      <text x="34" y="12" class="legend">primary key</text>
+      <rect x="120" width="24" height="15" rx="4" fill="#8B5CF6"/>
+      <text x="132" y="11" text-anchor="middle" class="key">FK</text>
+      <text x="154" y="12" class="legend">foreign key</text>
+      <rect x="240" width="24" height="15" rx="4" fill="#2F7A59"/>
+      <text x="252" y="11" text-anchor="middle" class="key">UK</text>
+      <text x="274" y="12" class="legend">unique</text>
+    </g>
+    <g transform="translate(18 48)">
+      <line x1="0" y1="0" x2="34" y2="0" stroke="#5B4BD6" stroke-width="1.8"/>
+      <path d="M0 0 V-5 M0 0 V5" stroke="#5B4BD6" stroke-width="1.8"/>
+      <text x="44" y="4" class="legend">one</text>
+      <path d="M124 0 L136 -6 M124 0 L136 0 M124 0 L136 6" stroke="#5B4BD6" stroke-width="1.6" fill="none"/>
+      <text x="146" y="4" class="legend">many</text>
+      <text x="218" y="4" class="legend">crow's-foot cardinality</text>
+    </g>
+  </g>
+
+  <!-- Relationship paths (behind entity cards) -->
+  <path d="M590 260 H285 V504" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-start="url(#one)" marker-end="url(#many)"/>
+  <rect x="297" y="340" width="106" height="24" rx="12" fill="#F7F4EE"/>
+  <text x="350" y="356" text-anchor="middle" class="rel">owns · 1 : N</text>
+
+  <path d="M930 260 H1240 V504" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-start="url(#one)" marker-end="url(#many)"/>
+  <rect x="1090" y="340" width="106" height="24" rx="12" fill="#F7F4EE"/>
+  <text x="1143" y="356" text-anchor="middle" class="rel">owns · 1 : N</text>
+
+  <path d="M480 700 H540 V800 H580" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-start="url(#one)" marker-end="url(#many)"/>
+  <rect x="486" y="742" width="92" height="24" rx="12" fill="#F7F4EE"/>
+  <text x="532" y="758" text-anchor="middle" class="rel">appears in</text>
+
+  <path d="M1240 720 V840 H936" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-start="url(#one)" marker-end="url(#many)"/>
+  <rect x="1040" y="828" width="92" height="24" rx="12" fill="#F7F4EE"/>
+  <text x="1086" y="844" text-anchor="middle" class="rel">contains</text>
+
+  <!-- USERS -->
+  <g filter="url(#erShadow)">
+    <rect x="590" y="170" width="340" height="234" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <path d="M590 184 C590 176 596 170 604 170 H916 C924 170 930 176 930 184 V222 H590 Z" fill="#0A1024"/>
+  <text x="612" y="192" class="entityName">users</text>
+  <text x="612" y="209" class="entityMeta">account identity · theme preference</text>
+  <rect x="878" y="182" width="34" height="20" rx="6" fill="#5B4BD6"/>
+  <text x="895" y="196" text-anchor="middle" class="key">1</text>
+
+  <g transform="translate(590 222)">
+    <rect width="340" height="26" fill="#FBF8F2"/>
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#5B4BD6"/><text x="26" y="16" text-anchor="middle" class="key">PK</text>
+    <text x="50" y="17" class="col">id</text><text x="324" y="17" text-anchor="end" class="type">INTEGER</text>
+  </g>
+  <g transform="translate(590 248)">
+    <text x="50" y="17" class="col">name</text><text x="324" y="17" text-anchor="end" class="type">VARCHAR(80)</text>
+  </g>
+  <g transform="translate(590 274)">
+    <rect width="340" height="26" fill="#FBF8F2"/>
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#2F7A59"/><text x="26" y="16" text-anchor="middle" class="key">UK</text>
+    <text x="50" y="17" class="col">email</text><text x="324" y="17" text-anchor="end" class="type">VARCHAR(255)</text>
+  </g>
+  <g transform="translate(590 300)">
+    <text x="50" y="17" class="col">password_hash</text><text x="324" y="17" text-anchor="end" class="type">VARCHAR(255)</text>
+  </g>
+  <g transform="translate(590 326)">
+    <rect width="340" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">theme</text><text x="324" y="17" text-anchor="end" class="type">VARCHAR(10)</text>
+  </g>
+  <g transform="translate(590 352)">
+    <text x="50" y="17" class="col">created_at</text><text x="324" y="17" text-anchor="end" class="type">DATETIME</text>
+  </g>
+  <g transform="translate(590 378)">
+    <rect width="340" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">updated_at</text><text x="324" y="17" text-anchor="end" class="type">DATETIME</text>
+  </g>
+
+  <!-- IMAGES -->
+  <g filter="url(#erShadow)">
+    <rect x="90" y="510" width="390" height="388" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <path d="M90 524 C90 516 96 510 104 510 H466 C474 510 480 516 480 524 V562 H90 Z" fill="#0A1024"/>
+  <text x="112" y="532" class="entityName">images</text>
+  <text x="112" y="549" class="entityMeta">metadata for every stored photograph</text>
+  <rect x="428" y="522" width="34" height="20" rx="6" fill="#5B4BD6"/>
+  <text x="445" y="536" text-anchor="middle" class="key">1</text>
+
+  <g transform="translate(90 562)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#5B4BD6"/><text x="26" y="16" text-anchor="middle" class="key">PK</text>
+    <text x="50" y="17" class="col">id</text><text x="374" y="17" text-anchor="end" class="type">INTEGER</text>
+  </g>
+  <g transform="translate(90 588)">
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#8B5CF6"/><text x="26" y="16" text-anchor="middle" class="key">FK</text>
+    <text x="50" y="17" class="col">user_id</text><text x="374" y="17" text-anchor="end" class="type">INTEGER → users.id</text>
+  </g>
+  <g transform="translate(90 614)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">original_filename</text><text x="374" y="17" text-anchor="end" class="type">VARCHAR(255)</text>
+  </g>
+  <g transform="translate(90 640)">
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#2F7A59"/><text x="26" y="16" text-anchor="middle" class="key">UK</text>
+    <text x="50" y="17" class="col">object_key</text><text x="374" y="17" text-anchor="end" class="type">VARCHAR(512)</text>
+  </g>
+  <g transform="translate(90 666)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">thumbnail_key</text><text x="374" y="17" text-anchor="end" class="type">VARCHAR(512)</text>
+  </g>
+  <g transform="translate(90 692)">
+    <text x="50" y="17" class="col">mime_type</text><text x="374" y="17" text-anchor="end" class="type">VARCHAR(80)</text>
+  </g>
+  <g transform="translate(90 718)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">extension</text><text x="374" y="17" text-anchor="end" class="type">VARCHAR(10)</text>
+  </g>
+  <g transform="translate(90 744)">
+    <text x="50" y="17" class="col">size_bytes</text><text x="374" y="17" text-anchor="end" class="type">BIGINT</text>
+  </g>
+  <g transform="translate(90 770)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">width · height</text><text x="374" y="17" text-anchor="end" class="type">INTEGER NULL</text>
+  </g>
+  <g transform="translate(90 796)">
+    <text x="50" y="17" class="col">is_favorite</text><text x="374" y="17" text-anchor="end" class="type">BOOLEAN</text>
+  </g>
+  <g transform="translate(90 822)">
+    <rect width="390" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">is_demo</text><text x="374" y="17" text-anchor="end" class="type">BOOLEAN</text>
+  </g>
+  <g transform="translate(90 848)">
+    <text x="50" y="17" class="col">created_at</text><text x="374" y="17" text-anchor="end" class="type">DATETIME · indexed</text>
+  </g>
+  <g transform="translate(90 874)">
+    <rect width="390" height="24" fill="#F1ECFA"/>
+    <text x="14" y="16" class="type" fill="#5B4BD6">INDEX (user_id, created_at) · INDEX (user_id, is_favorite)</text>
+  </g>
+
+  <!-- ALBUMS -->
+  <g filter="url(#erShadow)">
+    <rect x="1060" y="510" width="360" height="210" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <path d="M1060 524 C1060 516 1066 510 1074 510 H1406 C1414 510 1420 516 1420 524 V562 H1060 Z" fill="#0A1024"/>
+  <text x="1082" y="532" class="entityName">albums</text>
+  <text x="1082" y="549" class="entityMeta">user-created collections · not copies</text>
+  <rect x="1368" y="522" width="34" height="20" rx="6" fill="#5B4BD6"/>
+  <text x="1385" y="536" text-anchor="middle" class="key">1</text>
+
+  <g transform="translate(1060 562)">
+    <rect width="360" height="26" fill="#FBF8F2"/>
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#5B4BD6"/><text x="26" y="16" text-anchor="middle" class="key">PK</text>
+    <text x="50" y="17" class="col">id</text><text x="344" y="17" text-anchor="end" class="type">INTEGER</text>
+  </g>
+  <g transform="translate(1060 588)">
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#8B5CF6"/><text x="26" y="16" text-anchor="middle" class="key">FK</text>
+    <text x="50" y="17" class="col">user_id</text><text x="344" y="17" text-anchor="end" class="type">INTEGER → users.id</text>
+  </g>
+  <g transform="translate(1060 614)">
+    <rect width="360" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">name</text><text x="344" y="17" text-anchor="end" class="type">VARCHAR(80)</text>
+  </g>
+  <g transform="translate(1060 640)">
+    <text x="50" y="17" class="col">description</text><text x="344" y="17" text-anchor="end" class="type">VARCHAR(500) NULL</text>
+  </g>
+  <g transform="translate(1060 666)">
+    <rect width="360" height="26" fill="#FBF8F2"/>
+    <text x="50" y="17" class="col">created_at</text><text x="344" y="17" text-anchor="end" class="type">DATETIME</text>
+  </g>
+  <g transform="translate(1060 692)">
+    <text x="50" y="17" class="col">updated_at</text><text x="344" y="17" text-anchor="end" class="type">DATETIME</text>
+  </g>
+  <g transform="translate(1060 718)">
+    <rect width="360" height="28" fill="#F1ECFA"/>
+    <text x="14" y="18" class="type" fill="#5B4BD6">UNIQUE (user_id, name)</text>
+  </g>
+
+  <!-- ALBUM_IMAGES -->
+  <g filter="url(#erShadow)">
+    <rect x="586" y="760" width="344" height="154" rx="14" fill="#FFFDF9" stroke="#D9D0F5"/>
+  </g>
+  <path d="M586 774 C586 766 592 760 600 760 H916 C924 760 930 766 930 774 V812 H586 Z" fill="#121A33"/>
+  <text x="608" y="782" class="entityName">album_images</text>
+  <text x="608" y="799" class="entityMeta">explicit join table · membership timestamp</text>
+  <rect x="878" y="772" width="34" height="20" rx="6" fill="#8B5CF6"/>
+  <text x="895" y="786" text-anchor="middle" class="key">N</text>
+
+  <g transform="translate(586 812)">
+    <rect width="344" height="26" fill="#FBF8F2"/>
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#5B4BD6"/><text x="26" y="16" text-anchor="middle" class="key">PK</text>
+    <rect x="42" y="5" width="24" height="16" rx="4" fill="#8B5CF6"/><text x="54" y="16" text-anchor="middle" class="key">FK</text>
+    <text x="78" y="17" class="col">album_id</text><text x="328" y="17" text-anchor="end" class="type">→ albums.id</text>
+  </g>
+  <g transform="translate(586 838)">
+    <rect x="14" y="5" width="24" height="16" rx="4" fill="#5B4BD6"/><text x="26" y="16" text-anchor="middle" class="key">PK</text>
+    <rect x="42" y="5" width="24" height="16" rx="4" fill="#8B5CF6"/><text x="54" y="16" text-anchor="middle" class="key">FK</text>
+    <text x="78" y="17" class="col">image_id</text><text x="328" y="17" text-anchor="end" class="type">→ images.id</text>
+  </g>
+  <g transform="translate(586 864)">
+    <rect width="344" height="26" fill="#FBF8F2"/>
+    <text x="78" y="17" class="col">added_at</text><text x="328" y="17" text-anchor="end" class="type">DATETIME</text>
+  </g>
+  <g transform="translate(586 890)">
+    <text x="14" y="16" class="type" fill="#5B4BD6">COMPOSITE PRIMARY KEY (album_id, image_id)</text>
+  </g>
+
+  <!-- Notes -->
+  <g transform="translate(64 956)">
+    <rect width="1472" height="50" rx="13" fill="#FFFDF9" stroke="#E4DDD0"/>
+    <path d="M22 25 L27 30 L37 18" fill="none" stroke="#2F7A59" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="48" y="23" class="note"><tspan font-weight="600" fill="#1C1F31">Album membership is many-to-many.</tspan> One photograph can appear in several albums without duplicating the binary.</text>
+    <text x="48" y="39" class="note">Deleting an album removes its join rows but keeps every image. Deleting a user cascades their images, albums and links.</text>
+  </g>
+
+  <text x="64" y="1028" class="type" fill="#8B8D9D">AEROPIX · SQLAlchemy 2.0 declarative models · schema created idempotently at startup (Base.metadata.create_all)</text>
+  <text x="1456" y="1028" text-anchor="end" class="type" fill="#8B8D9D">ER diagram · not to scale</text>
+</svg>

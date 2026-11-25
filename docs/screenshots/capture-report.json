@@ -1,0 +1,113 @@
+{
+  "base": "http://localhost:4173",
+  "startedAt": "2026-11-25T15:45:12.720Z",
+  "shots": [
+    "01-landing.png",
+    "02-login.png",
+    "03-register.png",
+    "04-not-found.png",
+    "05-dashboard.png",
+    "06-gallery-masonry.png",
+    "07-gallery-lightbox.png",
+    "08-gallery-grid.png",
+    "09-gallery-list.png",
+    "10-upload-empty.png",
+    "11-upload-success.png",
+    "12-albums.png",
+    "13-album-detail.png",
+    "14-image-detail.png",
+    "15-settings.png",
+    "16-mobile-dashboard.png",
+    "17-dashboard-dark.png",
+    "18-gallery-dark.png"
+  ],
+  "consoleErrors": [],
+  "checks": [
+    {
+      "name": "Landing hero renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Hero illustration present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "404 page renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Demo login reaches dashboard",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Dashboard stat cards rendered",
+      "pass": true,
+      "detail": "4 cards"
+    },
+    {
+      "name": "Recharts charts rendered",
+      "pass": true,
+      "detail": "2 chart surfaces"
+    },
+    {
+      "name": "No broken images on dashboard",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Gallery renders demo images",
+      "pass": true,
+      "detail": "8 cards"
+    },
+    {
+      "name": "Lightbox opens from gallery",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Real upload succeeds through UI",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Uploaded test image cleaned up",
+      "pass": true,
+      "detail": "1 removed"
+    },
+    {
+      "name": "Albums page lists albums",
+      "pass": true,
+      "detail": "3 albums"
+    },
+    {
+      "name": "Album detail renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Image detail renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Settings page renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Dark theme applies",
+      "pass": true,
+      "detail": "data-theme=dark"
+    },
+    {
+      "name": "No browser console errors",
+      "pass": true,
+      "detail": "0 errors"
+    }
+  ],
+  "finishedAt": "2026-11-25T15:46:22.229Z"
+}

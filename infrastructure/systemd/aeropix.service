@@ -1,0 +1,41 @@
+[Unit]
+Description=AEROPIX FastAPI application
+Documentation=https://github.com/your-username/aeropix
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aeropix
+Group=www-data
+WorkingDirectory=/opt/aeropix/backend
+EnvironmentFile=/opt/aeropix/.env
+Environment=PYTHONUNBUFFERED=1
+
+# One worker is deliberate: SQLite (WAL) is the metadata store and one process
+# avoids write contention on a small academic deployment. Increase to 2-4
+# workers only after moving metadata to PostgreSQL.
+ExecStart=/opt/aeropix/.venv/bin/gunicorn app.main:app \
+    --workers 1 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 127.0.0.1:8000 \
+    --timeout 90 \
+    --graceful-timeout 30 \
+    --access-logfile - \
+    --error-logfile -
+
+Restart=always
+RestartSec=3
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+# Hardening: the app only needs its own directory and the Python venv.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/aeropix/backend/data
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

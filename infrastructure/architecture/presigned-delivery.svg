@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1010" viewBox="0 0 1600 1010" role="img" aria-labelledby="title desc">
+  <title id="title">AEROPIX presigned image delivery sequence</title>
+  <desc id="desc">The browser requests its image list with a JWT. FastAPI queries SQLite scoped to the authenticated user, generates short-lived presigned GET URLs with Boto3 using temporary credentials from the EC2 instance profile, and returns them. The browser fetches the bytes directly from the private S3 bucket. S3 verifies the signature and expiry and returns the image, or 403 after expiry.</desc>
+
+  <defs>
+    <pattern id="dotGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.1" fill="#15172A" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="heroWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DFF3FC" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#F7F4EE" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#15172A" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#5B4BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#7C7F92" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .eyebrow { font: 600 12px "Segoe UI", Inter, sans-serif; letter-spacing: 2.6px; text-transform: uppercase; fill: #5B4BD6; }
+      .title { font: 600 38px "Segoe UI", Inter, sans-serif; letter-spacing: -1.3px; fill: #15172A; }
+      .subtitle { font: 400 15px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .h3 { font: 600 15px "Segoe UI", Inter, sans-serif; letter-spacing: -0.2px; fill: #15172A; }
+      .body { font: 400 11.5px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .small { font: 400 10.5px "Segoe UI", Inter, sans-serif; fill: #8B8D9D; }
+      .msg { font: 500 12px "Segoe UI", Inter, sans-serif; fill: #1C1F31; }
+      .msgMuted { font: 400 12px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .note { font: 400 12px "Segoe UI", Inter, sans-serif; fill: #C3C8D6; }
+      .footer { font: 400 10.5px "Segoe UI", Inter, sans-serif; fill: #8B8D9D; }
+      .pill { font: 600 11px "Segoe UI", Inter, sans-serif; fill: #4B3A8C; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1010" fill="#F7F4EE"/>
+  <rect width="1600" height="1010" fill="url(#dotGrid)"/>
+  <rect x="0" y="0" width="900" height="400" fill="url(#heroWash)"/>
+
+  <!-- Header -->
+  <rect x="64" y="54" width="34" height="3" rx="1.5" fill="#5B4BD6"/>
+  <text x="110" y="62" class="eyebrow">Request flow · image delivery</text>
+  <text x="64" y="112" class="title">Private bytes, briefly signed.</text>
+  <text x="64" y="142" class="subtitle">The API returns short-lived presigned URLs; the browser fetches image data directly from S3.</text>
+
+  <g transform="translate(1236 48)">
+    <rect width="300" height="34" rx="17" fill="#FFFDF9" stroke="#D9D0F5"/>
+    <circle cx="18" cy="17" r="4" fill="#2F7A59"/>
+    <text x="31" y="21" class="pill">SigV4 · 900 s TTL · no public objects</text>
+  </g>
+
+  <!-- Lifelines -->
+  <line x1="200" y1="300" x2="200" y2="900" stroke="#CFC8DA" stroke-width="1.4" stroke-dasharray="4 6"/>
+  <line x1="600" y1="300" x2="600" y2="900" stroke="#CFC8DA" stroke-width="1.4" stroke-dasharray="4 6"/>
+  <line x1="1000" y1="300" x2="1000" y2="900" stroke="#CFC8DA" stroke-width="1.4" stroke-dasharray="4 6"/>
+  <line x1="1360" y1="300" x2="1360" y2="900" stroke="#CFC8DA" stroke-width="1.4" stroke-dasharray="4 6"/>
+
+  <!-- Participant cards -->
+  <g filter="url(#cardShadow)">
+    <rect x="90" y="190" width="220" height="96" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+    <rect x="470" y="190" width="260" height="96" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+    <rect x="890" y="190" width="220" height="96" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+    <rect x="1240" y="190" width="240" height="96" rx="14" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <rect x="90" y="190" width="220" height="5" rx="2.5" fill="#5B4BD6"/>
+  <rect x="470" y="190" width="260" height="5" rx="2.5" fill="#38BDF8"/>
+  <rect x="890" y="190" width="220" height="5" rx="2.5" fill="#4B5563"/>
+  <rect x="1240" y="190" width="240" height="5" rx="2.5" fill="#A5622F"/>
+
+  <text x="110" y="230" class="h3">Browser</text>
+  <text x="110" y="251" class="body">React gallery</text>
+  <text x="110" y="270" class="small">img src · Bearer token for API</text>
+
+  <text x="490" y="230" class="h3">FastAPI</text>
+  <text x="490" y="251" class="body">Gunicorn + Uvicorn</text>
+  <text x="490" y="270" class="small">ownership · signing · JSON</text>
+
+  <text x="910" y="230" class="h3">SQLite</text>
+  <text x="910" y="251" class="body">metadata only</text>
+  <text x="910" y="270" class="small">object keys · indexes</text>
+
+  <text x="1260" y="230" class="h3">Amazon S3</text>
+  <text x="1260" y="251" class="body">private bucket</text>
+  <text x="1260" y="270" class="small">SSE-S3 · SigV4 enforcement</text>
+
+  <!-- 1 · list request -->
+  <line x1="200" y1="355" x2="600" y2="355" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="240" y="329" width="320" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="400" y="344" text-anchor="middle" class="msg">GET /api/images · limit 24 · Bearer JWT</text>
+
+  <!-- 2 · auth scope -->
+  <path d="M600 400 h74 v32 h-74" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)" stroke-linejoin="round"/>
+  <rect x="682" y="399" width="240" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="690" y="414" class="msg">verify JWT · scope to user_id</text>
+
+  <!-- 3 · query -->
+  <line x1="600" y1="480" x2="1000" y2="480" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="622" y="454" width="356" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="800" y="469" text-anchor="middle" class="msg">SELECT … WHERE user_id = ? ORDER BY created_at</text>
+
+  <!-- 4 · rows -->
+  <line x1="1000" y1="535" x2="600" y2="535" stroke="#7C7F92" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrowMuted)"/>
+  <rect x="675" y="509" width="250" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="800" y="524" text-anchor="middle" class="msgMuted">rows + opaque object keys</text>
+
+  <!-- 5 · presign -->
+  <path d="M600 580 h74 v32 h-74" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)" stroke-linejoin="round"/>
+  <rect x="682" y="579" width="388" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="690" y="594" class="msg">boto3 generate_presigned_url('get_object', ExpiresIn=900)</text>
+
+  <!-- 6 · response -->
+  <line x1="600" y1="670" x2="200" y2="670" stroke="#7C7F92" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrowMuted)"/>
+  <rect x="238" y="644" width="324" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="400" y="659" text-anchor="middle" class="msgMuted">200 JSON · thumbnails + presigned URLs</text>
+
+  <!-- 7 · direct GET -->
+  <line x1="200" y1="735" x2="1360" y2="735" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="615" y="709" width="330" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="780" y="724" text-anchor="middle" class="msg">GET presigned URL · direct to S3</text>
+
+  <!-- 8 · verify signature -->
+  <path d="M1360 782 h-74 v32 h74" fill="none" stroke="#5B4BD6" stroke-width="1.8" marker-end="url(#arrow)" stroke-linejoin="round"/>
+  <rect x="1180" y="758" width="174" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="1188" y="773" class="msg">verify signature + expiry</text>
+
+  <!-- 9 · bytes -->
+  <line x1="1360" y1="855" x2="200" y2="855" stroke="#7C7F92" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrowMuted)"/>
+  <rect x="610" y="829" width="340" height="20" rx="6" fill="#F7F4EE"/>
+  <text x="780" y="844" text-anchor="middle" class="msgMuted">200 image bytes · 403 after expiry</text>
+
+  <!-- Footer note -->
+  <rect x="64" y="910" width="1472" height="66" rx="14" fill="#0A1024"/>
+  <text x="88" y="936" class="note"><tspan fill="#F7F4EE" font-weight="600">Why it is safe</tspan>  ·  Block Public Access 4/4  ·  no ACLs or website hosting  ·  the signature is the authorisation and it expires.</text>
+  <text x="88" y="958" class="note">EC2 gets temporary credentials from an IAM instance profile — no access keys on disk. Local mode mirrors steps 6–9 with an HMAC-signed /api/media URL.</text>
+
+  <text x="64" y="994" class="footer">AEROPIX · presigned delivery sequence · original SVG diagram rendered at 2×</text>
+</svg>

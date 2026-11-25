@@ -1,0 +1,48 @@
+# --- Secrets and local configuration ---
+.env
+.env.*
+!.env.example
+*.pem
+*.ppk
+*.key
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Runtime data (uploads, SQLite, generated demo art) ---
+backend/data/
+backend/demo_assets/
+*.db
+*.db-wal
+*.db-shm
+
+# --- Node / frontend build ---
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+
+# --- Logs and temporary files ---
+*.log
+tmp/
+temp/
+.cache/
+
+# --- Editors and operating systems ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Test / tooling output ---
+playwright-report/
+test-results/
+frontend/screenshots/

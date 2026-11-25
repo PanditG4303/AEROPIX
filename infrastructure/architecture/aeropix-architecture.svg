@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
+  <title id="title">AEROPIX production architecture on AWS</title>
+  <desc id="desc">A browser reaches Nginx on an EC2 instance over HTTPS. Nginx serves the React build and proxies API calls to FastAPI running under Gunicorn and Uvicorn. FastAPI stores metadata in SQLite and image binaries in a private Amazon S3 bucket using an IAM instance profile. Images are displayed through short-lived presigned URLs.</desc>
+
+  <defs>
+    <pattern id="dotGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.1" fill="#15172A" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="heroWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEE9FB" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#F7F4EE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="accentBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5B4BD6"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#15172A" flood-opacity="0.09"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#5B4BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowSoft" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#8B8D9D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .eyebrow { font: 600 12px "Segoe UI", Inter, sans-serif; letter-spacing: 2.6px; text-transform: uppercase; fill: #5B4BD6; }
+      .title { font: 600 38px "Segoe UI", Inter, sans-serif; letter-spacing: -1.4px; fill: #15172A; }
+      .subtitle { font: 400 15px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .h2 { font: 600 17px "Segoe UI", Inter, sans-serif; letter-spacing: -0.2px; fill: #15172A; }
+      .h3 { font: 600 14px "Segoe UI", Inter, sans-serif; fill: #15172A; }
+      .body { font: 400 12px "Segoe UI", Inter, sans-serif; fill: #626579; }
+      .bodyStrong { font: 600 12px "Segoe UI", Inter, sans-serif; fill: #1C1F31; }
+      .small { font: 400 10.5px "Segoe UI", Inter, sans-serif; fill: #8B8D9D; }
+      .mono { font: 500 10.5px "Consolas", "Cascadia Code", monospace; fill: #4B3A8C; }
+      .step { font: 700 11px "Segoe UI", Inter, sans-serif; fill: #FFFFFF; }
+      .stripTitle { font: 600 12px "Segoe UI", Inter, sans-serif; fill: #F7F4EE; }
+      .stripSub { font: 400 10.5px "Segoe UI", Inter, sans-serif; fill: #C3C8D6; }
+      .label { font: 600 10.5px "Segoe UI", Inter, sans-serif; letter-spacing: 0.4px; fill: #5B4BD6; }
+      .cloudLabel { font: 600 12px "Segoe UI", Inter, sans-serif; letter-spacing: 2px; fill: #A5622F; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1040" fill="#F7F4EE"/>
+  <rect width="1600" height="1040" fill="url(#dotGrid)"/>
+  <rect x="0" y="0" width="820" height="420" fill="url(#heroWash)"/>
+
+  <!-- Header -->
+  <rect x="64" y="54" width="34" height="3" rx="1.5" fill="#5B4BD6"/>
+  <text x="110" y="62" class="eyebrow">System architecture · AWS ap-south-1</text>
+  <text x="64" y="112" class="title">AEROPIX on AWS — one request, carefully travelled.</text>
+  <text x="64" y="142" class="subtitle">React SPA on EC2 behind Nginx · FastAPI metadata · private Amazon S3 binaries · no public objects</text>
+
+  <g transform="translate(1276 48)">
+    <rect width="260" height="34" rx="17" fill="#FFFDF9" stroke="#D9D0F5"/>
+    <circle cx="18" cy="17" r="4" fill="#2F7A59"/>
+    <text x="31" y="21" class="bodyStrong">Local mode verified · S3 ready</text>
+  </g>
+
+  <!-- Return path: S3 presigned URL to browser (behind cards) -->
+  <path d="M1280 512 L1280 872 L224 872 L224 704" fill="none" stroke="#8B8D9D" stroke-width="1.6" stroke-dasharray="7 6" marker-end="url(#arrowSoft)"/>
+  <rect x="642" y="856" width="396" height="32" rx="16" fill="#F7F4EE"/>
+  <text x="840" y="877" text-anchor="middle" class="label">6 · browser loads the image from S3 via a presigned GET URL</text>
+
+  <!-- Browser card -->
+  <g filter="url(#cardShadow)">
+    <rect x="64" y="300" width="320" height="400" rx="18" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <rect x="64" y="300" width="320" height="46" rx="18" fill="#0A1024"/>
+  <rect x="64" y="328" width="320" height="18" fill="#0A1024"/>
+  <circle cx="86" cy="323" r="4" fill="#C96A72"/>
+  <circle cx="100" cy="323" r="4" fill="#E8A87C"/>
+  <circle cx="114" cy="323" r="4" fill="#4ADE80"/>
+  <rect x="134" y="314" width="168" height="18" rx="9" fill="#121A33" stroke="#26304D"/>
+  <text x="218" y="327" text-anchor="middle" class="small" fill="#9AA2B7">aeropix.example.com</text>
+
+  <g transform="translate(88 372)">
+    <rect width="40" height="40" rx="11" fill="#EEE9FB"/>
+    <rect x="10" y="12" width="20" height="16" rx="3" fill="none" stroke="#5B4BD6" stroke-width="1.7"/>
+    <path d="M10 17 H30" stroke="#5B4BD6" stroke-width="1.7"/>
+    <circle cx="14" cy="14.5" r="1" fill="#5B4BD6"/>
+  </g>
+  <text x="144" y="390" class="h2">Your browser</text>
+  <text x="144" y="408" class="body">React 18 single-page app</text>
+
+  <line x1="88" y1="438" x2="360" y2="438" stroke="#E4DDD0"/>
+  <text x="88" y="464" class="bodyStrong">JWT in Authorization header</text>
+  <text x="88" y="482" class="body">Argon2-hashed passwords · 7-day token</text>
+
+  <text x="88" y="512" class="bodyStrong">Images are never public</text>
+  <text x="88" y="530" class="body">Signed URLs expire after 15 minutes</text>
+
+  <text x="88" y="560" class="bodyStrong">Interface states</text>
+  <text x="88" y="578" class="body">Masonry gallery · albums · upload queue</text>
+
+  <g transform="translate(88 606)">
+    <rect width="128" height="28" rx="14" fill="#E8F3EC"/>
+    <circle cx="16" cy="14" r="4" fill="#2F7A59"/>
+    <text x="27" y="18" class="bodyStrong" fill="#2F7A59">Private by default</text>
+  </g>
+  <g transform="translate(228 606)">
+    <rect width="108" height="28" rx="14" fill="#EEE9FB"/>
+    <text x="54" y="18" text-anchor="middle" class="bodyStrong" fill="#5B4BD6">Responsive</text>
+  </g>
+
+  <!-- AWS cloud boundary -->
+  <rect x="470" y="170" width="1080" height="650" rx="28" fill="#FFFDF9" fill-opacity="0.66" stroke="#D3CAB9" stroke-width="1.4" stroke-dasharray="9 7"/>
+  <rect x="494" y="186" width="188" height="26" rx="13" fill="#F7F4EE"/>
+  <text x="508" y="204" class="cloudLabel">AWS CLOUD · AP-SOUTH-1</text>
+
+  <!-- EC2 boundary -->
+  <rect x="500" y="230" width="540" height="540" rx="22" fill="#FBF8F2" stroke="#D9D0F5"/>
+  <rect x="500" y="230" width="540" height="46" rx="22" fill="#F1ECFA"/>
+  <rect x="500" y="258" width="540" height="18" fill="#F1ECFA"/>
+  <text x="524" y="259" class="h3" fill="#4B3A8C">Amazon EC2 · Ubuntu 24.04 · t3.small</text>
+  <text x="1012" y="259" text-anchor="end" class="small" fill="#7A6BA8">security group 22 / 80 / 443</text>
+
+  <!-- Nginx card -->
+  <g filter="url(#cardShadow)">
+    <rect x="528" y="316" width="224" height="184" rx="15" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <rect x="528" y="316" width="224" height="4" rx="2" fill="#2F7A59"/>
+  <g transform="translate(550 338)">
+    <rect width="38" height="38" rx="10" fill="#E8F3EC"/>
+    <path d="M11 12 H27 M11 19 H27 M11 26 H27" stroke="#2F7A59" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="8" cy="12" r="1.3" fill="#2F7A59"/>
+    <circle cx="8" cy="19" r="1.3" fill="#2F7A59"/>
+    <circle cx="8" cy="26" r="1.3" fill="#2F7A59"/>
+  </g>
+  <text x="600" y="352" class="h2">Nginx</text>
+  <text x="600" y="368" class="small">TLS · static files · reverse proxy</text>
+  <text x="550" y="400" class="body">Serves the Vite build from</text>
+  <text x="550" y="416" class="mono">/opt/aeropix/frontend/dist</text>
+  <text x="550" y="442" class="body">Proxies <tspan class="mono">/api/*</tspan> to FastAPI</text>
+  <text x="550" y="458" class="body">on <tspan class="mono">127.0.0.1:8000</tspan></text>
+  <g transform="translate(550 474)">
+    <rect width="180" height="16" rx="8" fill="#F1ECFA"/>
+    <text x="90" y="12" text-anchor="middle" class="small" fill="#5B4BD6">client_max_body_size 20 MB</text>
+  </g>
+
+  <!-- FastAPI card -->
+  <g filter="url(#cardShadow)">
+    <rect x="806" y="316" width="212" height="184" rx="15" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <rect x="806" y="316" width="212" height="4" rx="2" fill="#5B4BD6"/>
+  <g transform="translate(826 338)">
+    <rect width="38" height="38" rx="10" fill="#EEE9FB"/>
+    <path d="M13 27 L19 11 L25 27 M15.5 21 H22.5" stroke="#5B4BD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="876" y="352" class="h2">FastAPI</text>
+  <text x="876" y="368" class="small">Gunicorn + Uvicorn worker</text>
+  <text x="826" y="400" class="body">JWT auth · ownership checks</text>
+  <text x="826" y="416" class="body">Pillow validation · thumbnails</text>
+  <text x="826" y="432" class="body">Storage adapter interface</text>
+  <text x="826" y="448" class="body">SQLAlchemy 2.0 sessions</text>
+  <g transform="translate(826 464)">
+    <rect width="172" height="22" rx="11" fill="#0A1024"/>
+    <text x="86" y="15" text-anchor="middle" class="small" fill="#C4B5FD">local ↔ s3 · one code path</text>
+  </g>
+
+  <!-- SQLite -->
+  <g filter="url(#cardShadow)">
+    <rect x="806" y="548" width="212" height="152" rx="15" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <g transform="translate(828 566)">
+    <ellipse cx="18" cy="7" rx="18" ry="6" fill="#EEE9FB" stroke="#5B4BD6" stroke-width="1.4"/>
+    <path d="M0 7 V30 C0 34 8 37 18 37 C28 37 36 34 36 30 V7" fill="#EEE9FB" stroke="#5B4BD6" stroke-width="1.4"/>
+    <path d="M0 18 C0 22 8 25 18 25 C28 25 36 22 36 18" fill="none" stroke="#5B4BD6" stroke-width="1.2" opacity="0.6"/>
+  </g>
+  <text x="878" y="586" class="h3">SQLite metadata</text>
+  <text x="878" y="602" class="small">WAL mode · foreign keys on</text>
+  <text x="828" y="626" class="mono">users · images · albums</text>
+  <text x="828" y="642" class="mono">album_images (join)</text>
+  <text x="828" y="668" class="body">Object keys only — no binaries</text>
+  <text x="828" y="684" class="small">/opt/aeropix/backend/data/aeropix.db</text>
+
+  <!-- S3 card -->
+  <g filter="url(#cardShadow)">
+    <rect x="1080" y="250" width="400" height="262" rx="18" fill="#FFFDF9" stroke="#D8E8D3"/>
+  </g>
+  <rect x="1080" y="250" width="400" height="4" rx="2" fill="#569A31"/>
+  <g transform="translate(1108 276)">
+    <ellipse cx="24" cy="9" rx="24" ry="8" fill="#E8F3EC" stroke="#569A31" stroke-width="1.5"/>
+    <path d="M0 9 L7 44 H41 L48 9" fill="#E8F3EC" stroke="#569A31" stroke-width="1.5"/>
+    <path d="M0 9 C0 14 11 18 24 18 C37 18 48 14 48 9" fill="none" stroke="#569A31" stroke-width="1.3"/>
+    <path d="M15 25 L24 34 L33 25" fill="none" stroke="#569A31" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <text x="1176" y="292" class="h2">Amazon S3</text>
+  <text x="1176" y="310" class="small">private object storage</text>
+  <text x="1108" y="346" class="bodyStrong">Block Public Access: all four ON</text>
+  <text x="1108" y="366" class="body">Default encryption: SSE-S3 (AES256)</text>
+  <text x="1108" y="386" class="body">No ACLs · no static website hosting</text>
+  <text x="1108" y="406" class="body">Originals + stripped JPEG thumbnails</text>
+  <rect x="1108" y="424" width="344" height="30" rx="8" fill="#FBF8F2" stroke="#E4DDD0"/>
+  <text x="1122" y="443" class="mono">s3://aeropix-images/users/1/images/…</text>
+  <text x="1108" y="478" class="body">Presigned GET · default TTL 900 s</text>
+  <text x="1108" y="496" class="small">Generated server-side with Boto3 · never stored</text>
+
+  <!-- IAM card -->
+  <g filter="url(#cardShadow)">
+    <rect x="1080" y="556" width="400" height="174" rx="18" fill="#FFFDF9" stroke="#E4DDD0"/>
+  </g>
+  <g transform="translate(1108 580)">
+    <rect width="38" height="38" rx="10" fill="#FDF1E8"/>
+    <path d="M19 8 L30 12 V20 C30 27 25 31 19 33 C13 31 8 27 8 20 V12 Z" fill="none" stroke="#A5622F" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14 20 L18 24 L25 16" fill="none" stroke="#A5622F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="1160" y="596" class="h2">IAM instance profile</text>
+  <text x="1160" y="614" class="small">AEROPIX-EC2-S3-Role · no access keys</text>
+  <text x="1108" y="650" class="bodyStrong">Least privilege</text>
+  <text x="1108" y="668" class="mono">s3:ListBucket · GetObject</text>
+  <text x="1108" y="684" class="mono">s3:PutObject · DeleteObject</text>
+  <text x="1108" y="708" class="small">Scoped to one bucket ARN · Boto3 default chain</text>
+
+  <!-- Step arrows -->
+  <line x1="386" y1="390" x2="522" y2="390" stroke="#5B4BD6" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(398 362)">
+    <circle cx="0" cy="0" r="11" fill="#5B4BD6"/>
+    <text x="0" y="4" text-anchor="middle" class="step">1</text>
+  </g>
+  <text x="428" y="414" text-anchor="middle" class="label">HTTPS · JWT</text>
+
+  <line x1="756" y1="392" x2="800" y2="392" stroke="#5B4BD6" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(778 370)">
+    <circle cx="0" cy="0" r="11" fill="#5B4BD6"/>
+    <text x="0" y="4" text-anchor="middle" class="step">2</text>
+  </g>
+  <text x="778" y="414" text-anchor="middle" class="label">proxy</text>
+
+  <line x1="912" y1="502" x2="912" y2="542" stroke="#5B4BD6" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(936 520)">
+    <circle cx="0" cy="0" r="11" fill="#5B4BD6"/>
+    <text x="0" y="4" text-anchor="middle" class="step">3</text>
+  </g>
+  <text x="954" y="524" class="label">metadata</text>
+
+  <line x1="1022" y1="384" x2="1074" y2="384" stroke="#5B4BD6" stroke-width="2" marker-end="url(#arrow)"/>
+  <g transform="translate(1048 362)">
+    <circle cx="0" cy="0" r="11" fill="#5B4BD6"/>
+    <text x="0" y="4" text-anchor="middle" class="step">4</text>
+  </g>
+  <text x="1048" y="350" text-anchor="middle" class="label">Boto3</text>
+
+  <path d="M1080 650 H1048" fill="none" stroke="#8B8D9D" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrowSoft)"/>
+
+  <g transform="translate(1206 746)">
+    <circle cx="0" cy="0" r="11" fill="#5B4BD6"/>
+    <text x="0" y="4" text-anchor="middle" class="step">5</text>
+  </g>
+  <text x="1226" y="750" class="label">presigned URL returned to the browser</text>
+
+  <!-- Security strip -->
+  <g transform="translate(64 916)">
+    <rect width="1472" height="54" rx="15" fill="#0A1024"/>
+    <circle cx="30" cy="27" r="5" fill="#4ADE80"/>
+    <text x="46" y="23" class="stripTitle">TLS 1.2+</text>
+    <text x="46" y="38" class="stripSub">Nginx + Certbot</text>
+    <line x1="196" y1="12" x2="196" y2="42" stroke="#26304D"/>
+    <circle cx="226" cy="27" r="5" fill="#C4B5FD"/>
+    <text x="242" y="23" class="stripTitle">Argon2 + JWT</text>
+    <text x="242" y="38" class="stripSub">hashed passwords</text>
+    <line x1="408" y1="12" x2="408" y2="42" stroke="#26304D"/>
+    <circle cx="438" cy="27" r="5" fill="#7DD3FC"/>
+    <text x="454" y="23" class="stripTitle">SSE-S3 AES256</text>
+    <text x="454" y="38" class="stripSub">encryption at rest</text>
+    <line x1="626" y1="12" x2="626" y2="42" stroke="#26304D"/>
+    <circle cx="656" cy="27" r="5" fill="#F0A0A8"/>
+    <text x="672" y="23" class="stripTitle">No public objects</text>
+    <text x="672" y="38" class="stripSub">Block Public Access</text>
+    <line x1="862" y1="12" x2="862" y2="42" stroke="#26304D"/>
+    <circle cx="892" cy="27" r="5" fill="#E8A87C"/>
+    <text x="908" y="23" class="stripTitle">Least-privilege IAM</text>
+    <text x="908" y="38" class="stripSub">one bucket, five actions</text>
+    <line x1="1130" y1="12" x2="1130" y2="42" stroke="#26304D"/>
+    <circle cx="1160" cy="27" r="5" fill="#A78BFA"/>
+    <text x="1176" y="23" class="stripTitle">15-minute links</text>
+    <text x="1176" y="38" class="stripSub">time-limited media</text>
+  </g>
+
+  <text x="64" y="1004" class="small">Local development swaps S3 for HMAC-signed disk URLs behind the same storage interface — the UI and API contract do not change.</text>
+  <text x="1536" y="1004" text-anchor="end" class="small">AEROPIX · academic cloud computing project · diagram not to scale</text>
+</svg>
